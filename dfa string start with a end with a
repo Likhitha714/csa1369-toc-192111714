@@ -1,0 +1,41 @@
+#include <stdio.h>
+int isAccepted(char str[]) {
+    int currentState = 0;
+    int i = 0;
+    while(str[i] != '\0') {
+        switch(currentState) {
+            case 0:
+                if(str[i] == 'a')
+                    currentState = 1;
+                else
+                    return 0; 
+                break;
+            case 1:
+                if(str[i] == 'a')
+                    currentState = 2;
+                else if(str[i] != 'a')
+                    currentState = 1;
+                break;
+            case 2:
+                if(str[i] != 'a')
+                    return 0; 
+                break;
+        }
+        i++;
+    }
+    if(currentState == 2)
+        return 1; 
+    else
+        return 0; 
+}
+
+int main() {
+    char str[50];
+    printf("Enter a string: ");
+    scanf("%s", str);
+    if(isAccepted(str))
+        printf("The string %s is accepted by the DFA.\n", str);
+    else
+        printf("The string %s is rejected by the DFA.\n", str);
+    return 0;
+}
